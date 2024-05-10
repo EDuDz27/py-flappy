@@ -6,7 +6,7 @@ from random import randint
 class BG(pygame.sprite.Sprite):
     def __init__(self, groups,scale_factor):
         super().__init__(groups)
-        bg_image = pygame.image.load("fundo.png").convert()
+        bg_image = pygame.image.load(r"Images\fundo.png").convert()
         full_height = bg_image.get_height() * scale_factor
         full_width = bg_image.get_width() * scale_factor
         full_sized_image = pygame.transform.scale(bg_image, (full_width, full_height))
@@ -30,7 +30,7 @@ class Ground(pygame.sprite.Sprite):
         super().__init__(groups)
 
         #image
-        ground_surf = pygame.image.load("chao.png").convert_alpha()
+        ground_surf = pygame.image.load("Images\chao.png").convert_alpha()
         self.image = pygame.transform.scale(ground_surf, pygame.math.Vector2(ground_surf.get_size()) * scale_factor)
 
         #position
@@ -70,7 +70,7 @@ class Birdo(pygame.sprite.Sprite):
     def import_frames(self, scale_factor):
         self.frames = []
         for i in range(3):
-            birdoSprite = pygame.image.load(f"birdo{i}.png").convert_alpha()
+            birdoSprite = pygame.image.load(fr"Images\Birdo\birdo{i}.png").convert_alpha()
             birdoScaled = pygame.transform.scale(birdoSprite, pygame.math.Vector2(birdoSprite.get_size()) * scale_factor)
             self.frames.append(birdoScaled)
 
@@ -103,7 +103,7 @@ class Cano(pygame.sprite.Sprite):
         super().__init__(groups)
 
         distancia = randint(0, 2)
-        cano = pygame.image.load(f"cano{distancia}.png").convert_alpha()
+        cano = pygame.image.load(f"Images\Cano\cano{distancia}.png").convert_alpha()
         self.image = pygame.transform.scale(cano, pygame.math.Vector2(cano.get_size()) * scale_factor)
         
         correcao = 110
@@ -124,6 +124,9 @@ class Cano(pygame.sprite.Sprite):
 
         #mask
         self.mask = pygame.mask.from_surface(self.image)
+
+        #score
+        self.score_contado = False
 
     def update(self, dt):
         self.pos.x -= 300 * dt
